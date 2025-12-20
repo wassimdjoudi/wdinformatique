@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
-import wdLogo from '@/assets/wd-logo.jpg';
+import wdLogo from '@/assets/wd-logo.png';
 
 const Header = () => {
   const { t } = useTranslation();
