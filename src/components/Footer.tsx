@@ -58,17 +58,27 @@ const Footer = () => {
             ))}
           </motion.div>
 
-          {/* Copyright */}
+          {/* Developer Credit */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center gap-2 text-sm text-muted-foreground"
+            className="flex flex-col items-center gap-3 text-center"
           >
-            <div className="flex items-center gap-1">
-              <span>{t('footer.madeWith')}</span>
+            <div className="flex flex-col items-center gap-1">
+              <p className="text-sm font-medium text-foreground">
+                Created by the developer Djoudi Wassim
+              </p>
+              <p className="text-sm font-medium text-foreground" dir="rtl">
+                جودي وسيم
+              </p>
             </div>
-            <p>© {new Date().getFullYear()} WD Informatique. {t('footer.rights')}</p>
+            <p className="text-sm text-primary font-semibold" dir="rtl">
+              صدقة جارية على كل من أرسله ودرس به
+            </p>
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} WD Informatique. {t('footer.rights')}
+            </p>
           </motion.div>
         </div>
       </div>
