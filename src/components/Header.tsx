@@ -16,6 +16,7 @@ const Header = () => {
     { path: '/', label: t('nav.home') },
     { path: '/s1', label: t('nav.s1') },
     { path: '/s2', label: t('nav.s2') },
+    { path: '/register', label: t('nav.register') },
   ];
 
   const isActive = (path: string) => location.pathname === path;
