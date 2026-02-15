@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SemesterCard from '@/components/SemesterCard';
 import CodeBackground from '@/components/CodeBackground';
-import wdLogo from '@/assets/wd-logo.jpg';
+import heroBg from '@/assets/wd-hero-bg.png';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -20,25 +20,14 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 pt-20">
-        <div className="container mx-auto">
+      <section
+        className="relative min-h-screen flex items-center justify-center px-4 pt-20 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      >
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-background/70 dark:bg-background/80" />
+        <div className="container mx-auto relative z-10">
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-            {/* Logo Animation */}
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="mb-8"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/30 rounded-3xl blur-3xl animate-pulse-slow" />
-                <img
-                  src={wdLogo}
-                  alt="WD Informatique"
-                  className="relative w-64 md:w-80 h-auto rounded-2xl shadow-2xl"
-                />
-              </div>
-            </motion.div>
 
             {/* Subtitle */}
             <motion.div
