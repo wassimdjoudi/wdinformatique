@@ -20,14 +20,22 @@ const Index = () => {
       <Header />
 
       {/* Hero Section */}
-      <section
-        className="relative min-h-screen flex items-center justify-center px-4 pt-20 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      >
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-background/70 dark:bg-background/80" />
-        <div className="container mx-auto relative z-10">
+      <section className="relative min-h-screen flex items-center justify-center px-4 pt-20">
+        <div className="container mx-auto">
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
+            {/* Hero Image */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="mb-8"
+            >
+              <img
+                src={heroBg}
+                alt="WD Informatique"
+                className="w-72 md:w-96 h-auto rounded-2xl shadow-2xl"
+              />
+            </motion.div>
 
             {/* Subtitle */}
             <motion.div
