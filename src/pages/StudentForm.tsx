@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import { UserRound, Mail, School, BookOpen, GraduationCap, Send } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -42,24 +43,48 @@ const StudentForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
-    toast({
-      title: t('form.successTitle'),
-      description: t('form.successMessage'),
-    });
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from('students').insert({
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        university: formData.university,
+        academic_year: formData.academicYear,
+        specialization: formData.specialization,
+      });
 
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      university: '',
-      academicYear: '',
-      specialization: 'informatique',
-    });
-    setErrors({});
+      if (error) throw error;
+
+      toast({
+        title: t('form.successTitle'),
+        description: t('form.successMessage'),
+      });
+
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        university: '',
+        academicYear: '',
+        specialization: 'informatique',
+      });
+      setErrors({});
+    } catch (err) {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -218,10 +243,11 @@ const StudentForm = () => {
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full rounded-xl h-12 text-base font-semibold gap-2"
                 >
                   <Send className="w-4 h-4" />
-                  {t('form.submit')}
+                  {isSubmitting ? '...' : t('form.submit')}
                 </Button>
               </motion.div>
             </form>
